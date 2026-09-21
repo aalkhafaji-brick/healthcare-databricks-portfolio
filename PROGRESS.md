@@ -32,9 +32,6 @@
 - Databricks Academy: 90% score
 - GitHub commits: 3 notebooks pushed
 
-### Next Week
-Week 2: Delta time-travel + data quality fundamentals
-
 ---
 
 ## Week 2 (Sept 25-Oct 1, 2026) ✅ COMPLETE
@@ -92,16 +89,58 @@ Week 2: Delta time-travel + data quality fundamentals
 ### Time Logged
 - 8–10 hours (Notebook 04 development + troubleshooting + GitHub)
 
-### Next Week
-Week 3: Upserts + incremental loads (preparing for streaming/batch patterns)
-
 ---
 
-## Upcoming Notebooks (Weeks 3-6)
-- **Notebook 05** — Upserts + incremental loads (MERGE INTO pattern)
-- **Notebook 06** — Data quality as code (automated anomaly detection)
-- **Notebook 07** — Real-time streaming simulation (Kafka patterns)
-- **Notebooks 08-10** — Phase 2: LLM infrastructure (retrieval-augmented analysis)
+## Week 3 (Oct 2-8, 2026) ✅ IN PROGRESS
+**Focus: Production Patterns — Upserts, Data Quality, Streaming**
+
+### Notebooks Completed This Session
+5. **05-upserts-incremental-loads.sql** — MERGE INTO pattern for incremental updates
+6. **06-data-quality-as-code.sql** — Automated anomaly detection framework
+7. **07-streaming-simulation-kafka-patterns.sql** — Micro-batch streaming with checkpoint state
+
+### Notebook 05: Upserts + Incremental Loads
+- Baseline table: 500 patient encounters
+- Staging table: 50 new/updated records
+- MERGE INTO operation: 50 inserted (0 updated) = 550 total rows
+- Query results: 488 unique patients, 62 with multiple encounters (readmissions)
+- Key finding: Patient 77586282 = 32 avg medications (intervention target)
+
+### Notebook 06: Data Quality as Code
+- 5 automated quality rules (CRITICAL + WARNING severity)
+- Data quality score: **99.96%** (target: ≥95%)
+- 1 violation: Patient 442341 has 61 medications (outlier flagged for care review)
+- Production-ready status: PASS
+
+### Notebook 07: Real-Time Streaming Simulation
+- 30 admission events processed in 6 micro-batches (5 events per batch)
+- Batch processing success rate: **100%**
+- Operational metrics detected:
+  - 5 readmissions flagged for intervention
+  - 10 high-complexity admissions (33%) routed for expedited triage
+  - Batch 4: Low-complexity (8.8 avg meds) — deferred to standard intake
+  - Batch 6: High-complexity (4 patients) — prioritized for senior clinician review
+- Checkpoint state: Batch 6 processed, ready for next stream segment
+
+### Technical Patterns Mastered
+1. **MERGE INTO** — Upsert with atomic UPDATE + INSERT
+2. **ROW_NUMBER() OVER (PARTITION BY ...)** — Deduplication, windowing
+3. **Data quality as SQL rules** — Automated validation framework
+4. **Micro-batch streaming** — Kafka-ready patterns with checkpoint state
+5. **Operational dashboards** — Real-time KPIs (readmission rate, complexity distribution)
+
+### GitHub Commits (This Session)
+- Notebook 05: "Upserts + incremental loads (MERGE INTO pattern)" — 246 lines
+- Notebook 06: "Data quality as code (automated anomaly detection)" — 207 lines
+- Notebook 07: "Real-time streaming simulation (Kafka patterns, micro-batch processing)" — 180 lines
+
+### Time Logged
+- ~6-8 hours (3 notebooks, testing, GitHub management)
+
+### Next Steps
+- Notebook 08: Real-time dashboards (SQL + visualization)
+- Notebook 09: LLM integration (retrieval-augmented analysis)
+- Notebook 10: Multi-table joins (operational analytics)
 
 ---
 
@@ -126,10 +165,14 @@ healthcare-databricks-portfolio/
 │   ├── 01-delta-lake-intro.py ✅
 │   ├── 02-healthcare-sql-queries.py ✅
 │   ├── 03-diabetes-readmission-analysis.py ✅
-│   └── 04-delta-time-travel-status-tracking.sql ✅
+│   ├── 04-delta-time-travel-status-tracking.sql ✅
+│   ├── 05-upserts-incremental-loads.sql ✅
+│   ├── 06-data-quality-as-code.sql ✅
+│   └── 07-streaming-simulation-kafka-patterns.sql ✅
 ├── phase-1-dashboard/
 ├── phase-2-platform/
 ├── phase-3a-llm/
 ├── phase-3b-operations/
 └── interview-prep/
+```
 ```
