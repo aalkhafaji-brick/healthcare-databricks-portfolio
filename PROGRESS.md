@@ -221,9 +221,34 @@
 - Financial impact: 150-180K annual savings potential
 - GitHub: https://github.com/aalkhafaji-brick/healthcare-databricks-portfolio/blob/main/notebooks/10-multitable-joins-operational-analytics.sql
 
-**Week 4 Total:** 374 lines delivered | 1,100+ cumulative lines live | Job-ready: 90% (capstone remains)
+**Notebook 11: Healthcare AI Assistant (Phase 3A Capstone)** ✅
+- 214 lines | End-to-end decision support system (RAG + operational joins + compliance)
+- Query patient → Retrieve similar cases → Surface interventions → Compliance check → Output recommendations
+- Financial impact: $15-20K per high-risk case from readmission prevention
+- GitHub: https://github.com/aalkhafaji-brick/healthcare-databricks-portfolio/blob/main/notebooks/11-healthcare-ai-assistant-capstone.sql
 
-**Next: Phase 3A Capstone (Healthcare AI Assistant)** ⏳
+**Week 4 Total:** 588 lines delivered | 1,300+ cumulative lines live | Job-ready: 100% ✅
+
+**Phase 3A COMPLETE:** Notebooks 09-11 demonstrate RAG + operational analytics + compliance safety gates
+
+---
+
+## Portfolio Status Summary
+
+| Phase | Notebooks | Total Lines | Status |
+|-------|-----------|-------------|--------|
+| Phase 1: Foundations | 01-03 | 300+ | ✅ Complete |
+| Phase 2: Production Patterns | 04-08 | 914+ | ✅ Complete |
+| Phase 3A: LLM Infrastructure | 09-11 | 588+ | ✅ Complete |
+| **Total Job-Ready Portfolio** | **11 notebooks** | **1,300+** | **✅ 100%** |
+
+---
+
+## Next: Track B (Strategic Positioning)
+- Launches: October 2026
+- Duration: Q4 2026 – Q1 2027 (15-20 hrs/week)
+- Focus: Market knowledge, board thinking, team building, regulatory strategy
+- Parallel with: Databricks Phase 3B + 4 (ops + AI patterns + interview prep)
 ---
 
 ## Free Resources Used
@@ -238,3 +263,4 @@
 **https://github.com/aalkhafaji-brick/healthcare-databricks-portfolio**
 
 **Folder Structure:**
+
