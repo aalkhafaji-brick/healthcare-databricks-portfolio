@@ -208,16 +208,22 @@
 
 ---
 
-## Week 4 Checkpoint (Oct 8-15, 2026) ⏳ NEXT
+## Week 4 Status (Oct 1-8, 2026) ✅ COMPLETE
 
-### Phase 2: LLM Infrastructure & Operational AI (Weeks 9-16)
+**Notebook 09: Patient Similarity Search (RAG)** ✅
+- 201 lines | SQL-based weighted similarity | 488 patient profiles
+- Compliance gates + interview narrative
+- GitHub: https://github.com/aalkhafaji-brick/healthcare-databricks-portfolio/blob/main/notebooks/09-gte-embeddings-rag-analysis.sql
 
-**Notebooks 09-10 (This checkpoint):**
-- Notebook 09: Embeddings + retrieval-augmented queries (RAG patterns)
-- Notebook 10: Multi-table joins for operational analytics
+**Notebook 10: Multi-Table Joins (Operational Analytics)** ✅
+- 173 lines | 3 dimensional tables joined → 512 fact table
+- HIGH-risk cohort: 114 patients (22.3% census) | LOS differential: 1.7x
+- Financial impact: 150-180K annual savings potential
+- GitHub: https://github.com/aalkhafaji-brick/healthcare-databricks-portfolio/blob/main/notebooks/10-multitable-joins-operational-analytics.sql
 
-**Phase 2 Capstone:** Healthcare AI Assistant with retrieval-augmented generation + compliance safety gates
+**Week 4 Total:** 374 lines delivered | 1,100+ cumulative lines live | Job-ready: 90% (capstone remains)
 
+**Next: Phase 3A Capstone (Healthcare AI Assistant)** ⏳
 ---
 
 ## Free Resources Used
