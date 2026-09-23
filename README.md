@@ -1,38 +1,41 @@
 # Healthcare Databricks Portfolio
-## Hybrid Data + AI Architecture for C-Suite Operations
 
-Building enterprise-scale data infrastructure for healthcare operations with LLM safety gates.
+Hands-on data and AI work applied to real healthcare operations problems: readmissions, discharge handoffs, and data quality. Built on Databricks Free Edition with public data.
 
-**Learning Path**: Sept 2026 - March 2027 (Databricks Community Edition)
+Every result in these notebooks comes from code that ran on the data shown. Where a question can't be answered with the available data, the notebook says so.
 
-### Quick Links
-- 🎯 [Full Learning Plan](https://claude.ai/artifact/1p3UE4ocWR82guk65FQF9j)
-- 📊 [Progress Tracker](./PROGRESS.md)
-- 🔗 [Phase 1: Dashboard](./phase-1-dashboard/)
-- 🔐 [Phase 2: Compliance](./phase-2-platform/)
-- 🤖 [Phase 3A: LLM Infrastructure](./phase-3a-llm/)
-- ⚙️ [Phase 3B: Operations + AI](./phase-3b-operations/)
+## Featured: Notebook 12, Readmission Risk Model
+A hand-weighted risk formula (Notebook 09) tested against trained models on 13,998 held-out patients:
+- Hand-weighted formula: ROC-AUC 0.557, barely better than chance
+- Logistic regression: ROC-AUC 0.647; at a 10% outreach list it reaches about 307 at-risk patients vs. 178 for the same 1,400 calls
+- Strongest risk signal: discharge destination (rehab 26.4% readmitted vs. home 6.9%)
+- Fairness gate across race, gender, and age: PASS, enforced in code before scores are written
 
-### Projects In Progress
-- **Phase 1 (Weeks 1-4)**: Healthcare Operations Dashboard
-- **Phase 2 (Weeks 5-8)**: Multi-Department Compliance Platform
-- **Phase 3A (Weeks 9-12)**: Healthcare AI Assistant (LLM Data Layer)
-- **Phase 3B (Weeks 13-16)**: AI Operations Command Center
-- **Phase 4 (Weeks 17-24)**: Interview Ready + Job Launch
-- ### Documentation Roadmap (Track B: Strategic Positioning)
+[Open Notebook 12](./notebooks/12-readmission-risk-model.py)
 
-Building strategic positioning documentation in parallel with technical notebooks to demonstrate board-ready thinking:
+## Notebooks
+| # | Notebook | What it covers |
+|---|----------|----------------|
+| 01 | delta-lake-intro | Delta tables, inserts, queries |
+| 02 | healthcare-sql-queries | Filtering, grouping, aggregation |
+| 03 | diabetes-readmission-analysis | First look at the real dataset; readmission by HbA1c and prior utilization |
+| 04 | delta-time-travel-status-tracking | Table versioning, duplicate audit, deduplication |
+| 05 | upserts-incremental-loads | MERGE INTO for incremental updates |
+| 06 | data-quality-as-code | Automated data quality rules |
+| 07 | streaming-simulation-kafka-patterns | Micro-batch processing patterns (simulated) |
+| 08 | real-time-dashboards | Operational KPIs and rule-based risk tiers |
+| 09 | weighted-patient-similarity | Hand-weighted patient similarity scoring |
+| 10 | multitable-joins-operational-analytics | Multi-table joins for cohort analysis |
+| 11 | rule-based-discharge-support | Similarity + operational rules + compliance checks |
+| 12 | readmission-risk-model | Trained models, leakage controls, MLflow tracking, fairness gate |
 
-- **Track B: Market Analysis** (`docs/track-b-market-analysis.md`) — Healthcare AI company research, Series B-D funding landscape, unit economics, competitive moats
-- **Track B: Positioning Narratives** (`docs/track-b-positioning-narratives.md`) — Three C-suite positioning angles (CTO, CDO, VP Ops)
-- **Track B: Leadership Playbook** (`docs/track-b-leadership-playbook.md`) — Hiring philosophy, team structure, scaling principles
-- **Track B: Regulatory Strategy** (`docs/track-b-regulatory-strategy.md`) — HIPAA, FDA, CMS, state privacy, compliance as competitive advantage
+## Data
+Diabetes 130-US Hospitals for Years 1999–2008, UCI Machine Learning Repository (Strack et al., 2014): https://archive.ics.uci.edu/dataset/296/diabetes-130-us-hospitals-for-years-1999-2008
 
-These documents demonstrate strategic thinking alongside technical execution—positioning for board-ready C-suite roles by September 2027.
+The data is historical (1999–2008). Results show patterns in that data, not current hospital rates.
 
-### Current Status
-🚀 **Week 3 Complete** - Sept 22, 2026 (7 notebooks pushed, accelerated timeline activated)
+## Status
+Notebooks 01–12 complete. Next: Notebook 13, public CMS durable medical equipment data and anomaly detection. See [PROGRESS.md](./PROGRESS.md).
 
 ---
-
-*Built by Ali Al-Khafaji | Founder → Data Architect*
+*Ali Al-Khafaji*

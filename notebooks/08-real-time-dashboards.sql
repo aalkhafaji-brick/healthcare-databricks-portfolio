@@ -208,8 +208,8 @@ FROM patient_upsert_baseline
 -- MAGIC - **Average Medications/Patient:** 14.9
 -- MAGIC
 -- MAGIC ## Data Quality Status
--- MAGIC - **Overall Quality Score:** 99.96% ✅ (Production-ready)
--- MAGIC - **Data Freshness:** Real-time
+-- MAGIC - **Overall Quality Score:** 99.96% (5 rules passed on this sample)
+-- MAGIC - **Data Freshness:** Static historical sample (not a live feed)
 -- MAGIC - **Known Issues:** 1 medication outlier flagged for review
 -- MAGIC
 -- MAGIC ## COO Decision Framework
@@ -219,9 +219,8 @@ FROM patient_upsert_baseline
 -- MAGIC 2. **Launch medication review** for 89 HIGH-risk patients (polypharmacy protocol)
 -- MAGIC 3. **Readmission intervention** for 30 MEDIUM-risk patients
 -- MAGIC
--- MAGIC **Financial Impact:**
--- MAGIC - Each prevented readmission: $12K-15K
--- MAGIC - Target: 10% reduction in 51 readmitted patients = 5 prevented readmissions
--- MAGIC - **Potential 30-day savings: $60K-75K**
+-- MAGIC **Financial impact:** not estimated here. A defensible figure needs a sourced cost per readmission and a prevention rate measured in a pilot.
+-- MAGIC
+-- MAGIC *Note: risk tiers here are hand-set rules. Notebook 12 tests this approach against a trained model.*
 -- MAGIC
 -- MAGIC **Data Confidence:** 99.96% quality score supports decision-making at scale.

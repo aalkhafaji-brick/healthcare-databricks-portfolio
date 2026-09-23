@@ -148,9 +148,8 @@ LIMIT 10;
 -- MAGIC print("   • Highest complexity: High Burden (20+) + Suboptimal Glucose (9.8-day LOS)")
 -- MAGIC
 -- MAGIC print("\n💰 FINANCIAL IMPACT:")
--- MAGIC print("   • Cost per readmission: 15000")
 -- MAGIC print("   • HIGH-risk patients requiring intervention: 114")
--- MAGIC print("   • Potential annual savings from intervention: 150-180K")
+-- MAGIC print("   • Savings not estimated: needs sourced readmission cost + measured prevention rate")
 -- MAGIC
 -- MAGIC print("\n🎯 OPERATIONAL RECOMMENDATIONS:")
 -- MAGIC print("   1. Prioritize HIGH-risk cohort for discharge planning")

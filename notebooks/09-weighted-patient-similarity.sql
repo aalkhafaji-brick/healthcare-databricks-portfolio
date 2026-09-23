@@ -1,7 +1,7 @@
 -- Databricks notebook source
 -- MAGIC %python
 -- MAGIC # MAGIC %md
--- MAGIC # MAGIC # Notebook 09: Patient Similarity Search (SQL-Based RAG)
+-- MAGIC # MAGIC # Notebook 09: Weighted Patient Similarity (Rule-Based)
 -- MAGIC # MAGIC 
 -- MAGIC # MAGIC **Goal:** Identify clinically similar patients using SQL similarity scoring.
 -- MAGIC # MAGIC 
@@ -134,7 +134,6 @@ SELECT COUNT(*) as total_profiles FROM patient_clinical_profiles;
 -- MAGIC
 -- MAGIC print(f"\n📊 Similar patient cohort: {len(top_5)} patients")
 -- MAGIC print(f"   Readmissions: {readmissions_in_cohort}/{len(top_5)} ({round(readmissions_in_cohort/len(top_5)*100, 1)}%)")
--- MAGIC print(f"\n💰 Estimated impact: $8-12K savings per 30 days from early intervention")
 
 -- COMMAND ----------
 
@@ -180,7 +179,7 @@ SELECT COUNT(*) as total_profiles FROM patient_clinical_profiles;
 -- MAGIC - When new high-risk patient arrives (24 meds, 6 prior visits), we instantly see 
 -- MAGIC   5 similar historical cases
 -- MAGIC - Discharge planners know which interventions worked → evidence-based decisions in real-time
--- MAGIC - Similar patient cohort in this example: 0% readmission rate → model is finding good matches
+-- MAGIC - Caution: a 5-patient cohort is too small to judge match quality; the weights were hand-set, not learned (Notebook 12 found them near chance: ROC-AUC 0.557)
 -- MAGIC
 -- MAGIC Competitive moat:
 -- MAGIC - Data architecture (Databricks versioning + indexing)
@@ -194,8 +193,7 @@ SELECT COUNT(*) as total_profiles FROM patient_clinical_profiles;
 -- MAGIC
 -- MAGIC Any "find me similar past cases" problem uses this architecture.
 -- MAGIC
--- MAGIC Business impact: Similar-patient early intervention = $8-12K savings per 30 days per hospital
--- MAGIC At 500-bed system, that's $40-60K/month in readmission prevention alone.
+-- MAGIC Financial impact: not estimated here. A defensible figure needs a sourced cost per readmission and a prevention rate measured in a pilot.
 -- MAGIC """
 -- MAGIC
 -- MAGIC print(narrative)

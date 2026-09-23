@@ -1,15 +1,15 @@
 -- Databricks notebook source
 -- MAGIC %md
--- MAGIC # Notebook 11: Healthcare AI Assistant (Phase 3A Capstone)
+-- MAGIC # Notebook 11: Rule-Based Discharge Support (Phase 3A Capstone)
 -- MAGIC
--- MAGIC **Goal:** End-to-end decision support system combining RAG (Notebook 09) + Operational Analytics (Notebook 10)
+-- MAGIC **Goal:** End-to-end decision support system combining weighted patient similarity (Notebook 09) + Operational Analytics (Notebook 10)
 -- MAGIC
 -- MAGIC **Architecture:**
 -- MAGIC - Patient arrives → Query operational analytics (demographics, risk tier)
--- MAGIC - Retrieve similar historical cases (RAG from Notebook 09)
+-- MAGIC - Retrieve similar historical cases (weighted similarity from Notebook 09)
 -- MAGIC - Surface interventions that worked for similar patients
 -- MAGIC - Apply compliance gates (data quality, freshness, audit trail)
--- MAGIC - Generate operational recommendations + financial impact
+-- MAGIC - Generate operational recommendations
 -- MAGIC
 -- MAGIC **Use Case:** Discharge planners query system: "This patient is 24 meds, 6 prior visits, poor glucose control — what should we do?"
 -- MAGIC Result: Similar patients retrieved, interventions shown, compliance cleared, recommendations delivered.
@@ -136,7 +136,7 @@ SELECT * FROM capstone_summary;
 
 -- MAGIC %python
 -- MAGIC print("=" * 100)
--- MAGIC print("NOTEBOOK 11: HEALTHCARE AI ASSISTANT (PHASE 3A CAPSTONE)")
+-- MAGIC print("NOTEBOOK 11: RULE-BASED DISCHARGE SUPPORT (PHASE 3A CAPSTONE)")
 -- MAGIC print("=" * 100)
 -- MAGIC
 -- MAGIC print("\n✅ DECISION SUPPORT SYSTEM OPERATIONAL")
@@ -145,7 +145,7 @@ SELECT * FROM capstone_summary;
 -- MAGIC print("   • Medications: 24 (High Burden) | Prior visits: 6 | Risk tier: CRITICAL")
 -- MAGIC print("   • Glucose control: Poor Control | LOS: 7 days")
 -- MAGIC
--- MAGIC print("\n🔍 SIMILAR PATIENTS RETRIEVED (RAG):")
+-- MAGIC print("\n🔍 SIMILAR PATIENTS RETRIEVED (weighted similarity):")
 -- MAGIC print("   • 5 comparable historical cases identified")
 -- MAGIC print("   • Top match: Patient_91563 (95.0% similarity)")
 -- MAGIC print("   • Cohort readmission rate: 0% (0 readmissions / 5 patients)")
@@ -172,7 +172,7 @@ SELECT * FROM capstone_summary;
 -- MAGIC
 -- MAGIC print("\n📊 OPERATIONAL STATUS:")
 -- MAGIC print("   System is READY. Discharge planners can:")
--- MAGIC print("   1. Query similar patients (RAG retrieval)")
+-- MAGIC print("   1. Query similar patients (weighted similarity)")
 -- MAGIC print("   2. Review evidence-based interventions")
 -- MAGIC print("   3. Execute recommendations (compliance-cleared)")
 -- MAGIC print("   4. Track outcomes via audit trail")
@@ -181,9 +181,9 @@ SELECT * FROM capstone_summary;
 -- MAGIC print("INTERVIEW STORY")
 -- MAGIC print("=" * 100)
 -- MAGIC print("""
--- MAGIC I built an end-to-end healthcare AI assistant combining three technical patterns:
+-- MAGIC I built an end-to-end rule-based discharge support flow combining three patterns:
 -- MAGIC
--- MAGIC 1. RETRIEVAL-AUGMENTED ANALYSIS (Notebook 09)
+-- MAGIC 1. WEIGHTED PATIENT SIMILARITY (Notebook 09)
 -- MAGIC    - Patient similarity search using weighted scoring
 -- MAGIC    - Retrieves 5 comparable historical cases for any query patient
 -- MAGIC    - Surfaces interventions that worked for similar patients
@@ -191,7 +191,6 @@ SELECT * FROM capstone_summary;
 -- MAGIC 2. OPERATIONAL ANALYTICS (Notebook 10)
 -- MAGIC    - Multi-table dimensional joins (patients + medications + outcomes)
 -- MAGIC    - Risk stratification and cross-departmental cohort analysis
--- MAGIC    - Quantifies financial impact of operational decisions
 -- MAGIC
 -- MAGIC 3. COMPLIANCE SAFETY GATES
 -- MAGIC    - Data quality validation (99.96% threshold)
@@ -201,14 +200,14 @@ SELECT * FROM capstone_summary;
 -- MAGIC
 -- MAGIC IMPACT:
 -- MAGIC High-risk discharge case (24 meds, 6 prior visits, CRITICAL tier) arrives.
--- MAGIC System retrieves 5 similar patients, shows interventions that prevented readmissions.
+-- MAGIC System retrieves 5 similar patients and the interventions recorded for them.
 -- MAGIC Compliance gates clear. Discharge planners get evidence-based plan immediately.
--- MAGIC Estimated: $15K-20K savings per case from readmission prevention.
+-- MAGIC Limitation: rules and weights are hand-set; Notebook 12 shows why they need validation against outcomes.
 -- MAGIC
 -- MAGIC SKILLS DEMONSTRATED:
 -- MAGIC - SQL/Python: Multi-table joins, similarity scoring, compliance logic
 -- MAGIC - Healthcare: Clinical decision support, intervention prioritization, readmission risk
--- MAGIC - Systems architecture: RAG + operational context + safety gates
+-- MAGIC - Systems architecture: similarity scoring + operational context + safety gates
 -- MAGIC - Production mindset: Audit trails, data quality, compliance-first design
 -- MAGIC """)
 -- MAGIC print("=" * 100)

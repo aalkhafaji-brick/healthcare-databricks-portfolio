@@ -3,7 +3,7 @@
 # MAGIC # Notebook 03: Diabetes Readmission Risk Analysis
 # MAGIC ## Real Data Insight: HbA1c Control & Hospital Readmissions
 # MAGIC
-# MAGIC Dataset: Diabetes 130-US Hospitals (1999-2008) | 101,766 patient records | 10 years of clinical care
+# MAGIC Dataset: Diabetes 130-US Hospitals (1999-2008) | 101,766 encounters | UCI Machine Learning Repository (Strack et al., 2014): https://archive.ics.uci.edu/dataset/296/diabetes-130-us-hospitals-for-years-1999-2008
 # MAGIC
 # MAGIC Research Question: Does uncontrolled diabetes (poor HbA1c) predict 30-day readmission?
 # MAGIC
@@ -12,7 +12,6 @@
 # MAGIC What we'll discover:
 # MAGIC - How HbA1c control level correlates with readmission rates
 # MAGIC - Which patients are flagged as high-risk (early warning signals)
-# MAGIC - Cost impact of preventable readmissions
 # MAGIC - How data architecture enables predictive intervention vs. reactive treatment
 # MAGIC
 # MAGIC Your Role as COO: "I architect data systems that make operational silos visible. Healthcare operations = turning HbA1c + utilization data into predictive alerts that prevent readmission."
@@ -141,9 +140,11 @@
 # MAGIC
 # MAGIC **The high-risk patient is predictable:** Flag at discharge if prior utilization ≥ 3 + medication count ≥ 17.
 # MAGIC
+# MAGIC *Update (Notebook 12): a trained model on held-out patients found medication count adds no predictive value once other factors are known; discharge destination and prior inpatient stays matter most.*
+# MAGIC
 # MAGIC **The intervention opportunity:** Real-time glucose monitoring (Dexcom/CGM) + coordinated care handoff before discharge for this cohort.
 # MAGIC
-# MAGIC **The financial impact:** Preventing 10% of readmissions in the 9,192 "high prior util" patients = ~900 readmissions prevented = $9-12M annual savings (at $10-12K per readmission cost).
+# MAGIC **Financial impact:** not estimated here. A defensible figure needs a sourced cost per readmission and a prevention rate measured in a pilot.
 # MAGIC
 # MAGIC ---
 # MAGIC
