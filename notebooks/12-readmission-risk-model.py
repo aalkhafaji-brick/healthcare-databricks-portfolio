@@ -180,24 +180,23 @@ else:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC %md
 # MAGIC ## Findings: Notebook 12
 # MAGIC
-# MAGIC **Data:** UCI Diabetes 130-US Hospitals (1999–2008). 69,990 patients after removing hospice/death discharges and keeping one visit per patient. 30-day readmission base rate: 8.98%.
+# MAGIC **Data:** UCI Diabetes 130-US Hospitals (1999–2008), Strack et al. 2014. 69,990 patients after removing hospice/death discharges and keeping one visit per patient. 30-day readmission base rate: 8.98%.
 # MAGIC
 # MAGIC **Guessed weights vs. learned model (test set, 13,998 patients):**
-# MAGIC - Notebook 09 hand-picked formula: ROC-AUC 0.557, PR-AUC 0.108
-# MAGIC - Logistic regression: ROC-AUC 0.647, PR-AUC 0.172 (chosen; gradient boosting tied at 0.647)
-# MAGIC - At a 10% call list: 24.4% of readmissions reached vs. 14.2%, about 307 vs. 178 patients for the same 1,400 calls
+# MAGIC - Notebook 09 hand-weighted formula: ROC-AUC 0.557, PR-AUC 0.108
+# MAGIC - Logistic regression: ROC-AUC 0.647, PR-AUC 0.172 (chosen; gradient boosting tied at 0.647, so the simpler, explainable model wins)
+# MAGIC - At a 10% call list: about 307 vs. 178 at-risk patients reached with the same 1,400 calls
 # MAGIC
-# MAGIC **What drives risk:** Discharge destination was by far the strongest factor, followed by prior inpatient stays. Medication count, which my formula weighted heavily, contributed nothing.
+# MAGIC **What drives risk:** Discharge destination was by far the strongest factor, followed by prior inpatient stays. Medication count, the heaviest weight in the formula, contributed nothing.
 # MAGIC
 # MAGIC **By destination:** Rehab 26.4%, other inpatient facility 20.6%, SNF 13.4%, home health 9.5%, home 6.9%. Destination unrecorded for 2,474 patients (10.1% readmitted).
 # MAGIC
 # MAGIC **Fairness gate:** PASS. All groups within 0.05 of overall. Ages 90–100 and 60–70 lowest; monitor.
 # MAGIC
-# MAGIC **What I'd tell a COO:** [your 2–3 sentences]
+# MAGIC **What I'd tell a COO:** A validated model lets us reach at-risk patients before they come back instead of after. With the same 1,400 calls, we reach about 307 patients who would be readmitted instead of about 178. How far down the list we go should be set by call capacity and readmission cost, and a pilot is needed to prove the calls actually prevent readmissions.
 # MAGIC
-# MAGIC **What this data can't answer:** [your 1–2 sentences: think back to the readmission-cause question]
+# MAGIC **What this data can't answer:** Whether facility readmissions come from how sick patients were or from how the handoff went. The dataset records whether a patient came back, but not why or when, so these are fields we'd need to start collecting to target remedies precisely.
 # MAGIC
-# MAGIC **What I'd need next:** [the four data fields you'd require]
+# MAGIC **What I'd need next:** The readmission diagnosis linked to the original stay's discharge diagnosis, present-on-admission flags, a timeline (discharge, facility arrival, readmission), and the receiving facility.
