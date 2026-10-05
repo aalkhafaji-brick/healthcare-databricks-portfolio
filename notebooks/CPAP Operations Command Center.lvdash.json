@@ -1,0 +1,470 @@
+{
+  "datasets": [
+    {
+      "name": "c145faab",
+      "displayName": "cc_item_statements_v",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.cc_item_statements_v",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "6bbb5655",
+      "displayName": "cc_item_summary_v",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.cc_item_summary_v",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "3d79573f",
+      "displayName": "cc_pipeline_health_v",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.cc_pipeline_health_v",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "99f75db0",
+      "displayName": "cc_ai_summaries_v",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.cc_ai_summaries_v",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "1821d059",
+      "displayName": "CPAP Operations Command Center",
+      "layout": [
+        {
+          "widget": {
+            "name": "data-age-months",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3d79573f",
+                  "fields": [
+                    {
+                      "name": "sum(data_age_months)",
+                      "expression": "SUM(`data_age_months`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Data age (months)",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(data_age_months)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "days-since-last-pipeline-run",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3d79573f",
+                  "fields": [
+                    {
+                      "name": "sum(days_since_last_run)",
+                      "expression": "SUM(`days_since_last_run`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Days since last pipeline run",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(days_since_last_run)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 1,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "resupply-received-medicare-allowance",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c145faab",
+                  "fields": [
+                    {
+                      "name": "item_name",
+                      "expression": "`item_name`"
+                    },
+                    {
+                      "name": "sum(pct_of_allowance)",
+                      "expression": "SUM(`pct_of_allowance`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Resupply received as % of Medicare allowance",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "item_name",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(pct_of_allowance)",
+                  "displayName": "% of allowance received",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "prescribers-far-below-far-above-peers",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c145faab",
+                  "fields": [
+                    {
+                      "name": "item_name",
+                      "expression": "`item_name`"
+                    },
+                    {
+                      "name": "sum(low_flags)",
+                      "expression": "SUM(`low_flags`)"
+                    },
+                    {
+                      "name": "sum(high_flags)",
+                      "expression": "SUM(`high_flags`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Prescribers far below / far above peers",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "mark": {
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "item_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "fields": [
+                    {
+                      "fieldName": "sum(low_flags)",
+                      "displayName": "Far below peers"
+                    },
+                    {
+                      "fieldName": "sum(high_flags)",
+                      "displayName": "Far above peers"
+                    }
+                  ]
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 3,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "what-patients-received-by-item",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c145faab",
+                  "fields": [
+                    {
+                      "name": "statement",
+                      "expression": "`statement`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "What patients received, by item",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "statement"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "ai-summaries-human-approval",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "99f75db0",
+                  "fields": [
+                    {
+                      "name": "item",
+                      "expression": "`item`"
+                    },
+                    {
+                      "name": "human_review",
+                      "expression": "`human_review`"
+                    },
+                    {
+                      "name": "summary_for_display",
+                      "expression": "`summary_for_display`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "AI summaries (shown only after human approval).",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "item"
+                  },
+                  {
+                    "fieldName": "human_review"
+                  },
+                  {
+                    "fieldName": "summary_for_display"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 9,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "44f613f8",
+            "multilineTextboxSpec": {
+              "lines": [
+                "Twice-yearly items show higher percentages partly because a limit of 2 makes each unit worth 50%."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 15,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "99eb5e1a",
+            "multilineTextboxSpec": {
+              "lines": [
+                "CMS 2024 Medicare data (see Data age counter)**.** Flags are statistical signals compared with peers, not findings of wrongdoing. No item exceeded Medicare limits."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
