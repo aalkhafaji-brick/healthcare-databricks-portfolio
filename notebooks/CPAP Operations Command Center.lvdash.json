@@ -455,6 +455,51 @@
             "width": 12,
             "height": 1
           }
+        },
+        {
+          "widget": {
+            "name": "gates-passed",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3d79573f",
+                  "fields": [
+                    {
+                      "name": "sum(gates_passed)",
+                      "expression": "SUM(`gates_passed`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Gates Passed",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "target": {
+                  "fieldName": "sum(gates_passed)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 1,
+            "width": 4,
+            "height": 2
+          }
         }
       ],
       "pageType": "PAGE_TYPE_CANVAS",
