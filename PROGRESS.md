@@ -1,6 +1,8 @@
 # Progress Log
 
-Databricks learning plan, Sept 2026 – March 2027, applied to healthcare operations. Workspace: Databricks Free Edition. Dataset: Diabetes 130-US Hospitals (1999–2008), UCI Machine Learning Repository (Strack et al., 2014), 101,766 encounters.
+Databricks learning plan, Sept 2026 – March 2027, applied to healthcare operations. Workspace: Databricks Free Edition.
+
+Datasets: Diabetes 130-US Hospitals (1999–2008), UCI Machine Learning Repository (Strack et al., 2014), 101,766 encounters (Notebooks 03–12). Medicare DME by Referring Provider and Service, 2024, CMS, 1,347,255 rows (Notebooks 13–17).
 
 Only results produced by the notebooks are recorded here. No cost or savings figures are claimed; a defensible estimate would need a sourced cost per readmission and a prevention rate measured in a pilot.
 
@@ -39,6 +41,21 @@ Also completed: Databricks Academy fundamentals course.
 - Fairness gate (race, gender, age): PASS; scores written to Delta only if the gate passes; runs tracked in MLflow
 - Limit: the data records whether a patient returned, not why or when
 
+## CPAP resupply: data to dashboard (Sept 24 – Oct 5, 2026)
+**13 – cms-dme-anomaly-detection:** National 2024 Medicare DME data, 1,347,255 rows.
+- Data quality catch: the default CSV reader shifted columns for one wheelchair code (K0056); fixed with correct quote handling, and a guardrail now stops the notebook if it recurs
+- Patient counts hidden for privacy in 69% of rows; visible rows still cover 75–96% of CPAP services
+- CPAP devices and supplies make up roughly 40% of DME claims, mostly recurring resupply
+- No prescriber averaged above Medicare's replacement limits (likely because over-limit units are denied); median resupply ran at about half the allowance
+- Robust peer comparison flagged 173 of 160,582 rows; with a 20-patient minimum, 27 survived (7 high, 20 low), and 17 of the 20 low flags were on items under $20 per unit
+
+**14 – unity-catalog-governance:** Identity columns classified (restricted / internal / public); names and street addresses masked, verified without displaying any name; shareable view with no identifiers and groups of 11+ prescribers; automatic lineage confirmed. Accepted risk: the NPI stays unmasked in bronze for the pipeline and is never displayed.
+
+**15 – scheduled-pipeline-quality-gates:** The Notebook 13 flow as a monthly Databricks Job with 8 quality gates (ingestion integrity, data sufficiency, privacy), a run log, and failure email. A deliberate gate failure was logged and stopped the pipeline. Scheduled run reproduced Notebook 13 exactly (160,582 rows) in about 2 minutes. Known gap: the source link is fixed to the 2024 file, so a freshness check is needed.
+
+**16 – llm-layer-with-evaluation:** Llama 3.3 70B wrote 12 item summaries from the shareable view. Code verified all 51 numbers (0 unsupported); a second model (Qwen3) approved all 12; human review found wording problems ("require," "usage," widened scope, "habits") in most.
+
+**17 – operations-command-center:** Published dashboard on governed views: % of allowance received by item (48–70%), flags far below / above peers (20 / 7), data age (21 months), pipeline health, template statements that always say "received," and AI summaries shown only after human approval (2 of 12 approved, with reviewer and reason recorded).
+
 ## Next
-**13:** Public CMS durable medical equipment data, anomaly detection.
-Then: Unity Catalog governance, scheduled pipelines with data quality checks, a real LLM layer with evaluation, and an operations command center capstone.
+Phase 4: interview readiness. Later: a freshness gate for new CMS releases, and real embedding-based search (the honest version of Notebook 09).

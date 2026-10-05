@@ -1,24 +1,26 @@
 # Healthcare Databricks Portfolio
 
-Hands-on data and AI work applied to real healthcare operations problems: readmissions, discharge handoffs, and data quality. Built on Databricks Free Edition with public data.
+Hands-on data and AI work applied to real healthcare operations problems: readmissions, durable medical equipment (DME) resupply, data governance, and trustworthy AI. Built on Databricks Free Edition with public data.
 
 Every result in these notebooks comes from code that ran on the data shown. Where a question can't be answered with the available data, the notebook says so.
 
-## Featured: Notebook 12, Readmission Risk Model
-A hand-weighted risk formula (Notebook 09) tested against trained models on 13,998 held-out patients:
-- Hand-weighted formula: ROC-AUC 0.557, barely better than chance
-- Logistic regression: ROC-AUC 0.647; at a 10% outreach list it reaches about 307 at-risk patients vs. 178 for the same 1,400 calls
-- Strongest risk signal: discharge destination (rehab 26.4% readmitted vs. home 6.9%)
-- Fairness gate across race, gender, and age: PASS, enforced in code before scores are written
+## Featured work
 
-[Open Notebook 12](./notebooks/12-readmission-risk-model.py)
+**Notebooks 13–17: CPAP resupply, from raw Medicare data to an executive dashboard**
+- **13:** 1.35M Medicare DME records. Resupply runs at about half the Medicare allowance. Apparent over-ordering was mostly small-sample noise; the signal that held up was under-supply of low-cost items such as filters.
+- **14:** Unity Catalog governance: column classification, masking of names and addresses, a shareable view with no identifiers, and automatic lineage.
+- **15:** The analysis as a scheduled Databricks Job with 8 quality gates that stop the pipeline and alert on failure. Gates were tested by deliberately breaking one.
+- **16:** AI summaries with two-layer evaluation. 0 of 12 contained an unsupported number, an AI auditor approved all 12, and human review still found misleading wording in most.
+- **17:** A published Operations Command Center dashboard that reads only governed views and shows AI text only after human approval.
+
+**Notebook 12: readmission risk model.** A hand-weighted formula scored barely better than chance (ROC-AUC 0.557); a trained model reached 0.647 and passed a fairness check across race, gender, and age.
 
 ## Notebooks
 | # | Notebook | What it covers |
 |---|----------|----------------|
 | 01 | delta-lake-intro | Delta tables, inserts, queries |
 | 02 | healthcare-sql-queries | Filtering, grouping, aggregation |
-| 03 | diabetes-readmission-analysis | First look at the real dataset; readmission by HbA1c and prior utilization |
+| 03 | diabetes-readmission-analysis | First look at the diabetes dataset |
 | 04 | delta-time-travel-status-tracking | Table versioning, duplicate audit, deduplication |
 | 05 | upserts-incremental-loads | MERGE INTO for incremental updates |
 | 06 | data-quality-as-code | Automated data quality rules |
@@ -27,15 +29,24 @@ A hand-weighted risk formula (Notebook 09) tested against trained models on 13,9
 | 09 | weighted-patient-similarity | Hand-weighted patient similarity scoring |
 | 10 | multitable-joins-operational-analytics | Multi-table joins for cohort analysis |
 | 11 | rule-based-discharge-support | Similarity + operational rules + compliance checks |
-| 12 | readmission-risk-model | Trained models, leakage controls, MLflow tracking, fairness gate |
+| 12 | readmission-risk-model | Trained models, leakage controls, MLflow, fairness gate |
+| 13 | cms-dme-anomaly-detection | Medicare DME data, CSV parsing fix, policy limits, robust peer outliers |
+| 14 | unity-catalog-governance | Classification tags, column masks, shareable view, lineage |
+| 15 | scheduled-pipeline-quality-gates | Scheduled Job, 8 quality gates, run log, failure test |
+| 16 | llm-layer-with-evaluation | AI summaries, number verification, AI auditor, human review |
+| 17 | operations-command-center | Published dashboard on governed views |
 
 ## Data
-Diabetes 130-US Hospitals for Years 1999–2008, UCI Machine Learning Repository (Strack et al., 2014): https://archive.ics.uci.edu/dataset/296/diabetes-130-us-hospitals-for-years-1999-2008
+- **Notebooks 03–12:** Diabetes 130-US Hospitals for Years 1999–2008, UCI Machine Learning Repository (Strack et al., 2014): https://archive.ics.uci.edu/dataset/296/diabetes-130-us-hospitals-for-years-1999-2008
+- **Notebooks 13–17:** Medicare Durable Medical Equipment, Devices & Supplies by Referring Provider and Service, 2024 (CMS): https://data.cms.gov/provider-summary-by-type-of-service/medicare-durable-medical-equipment-devices-supplies/medicare-durable-medical-equipment-devices-supplies-by-referring-provider-and-service
 
-The data is historical (1999–2008). Results show patterns in that data, not current hospital rates.
+Both datasets are historical. Results describe patterns in that data, not current rates.
+
+## Publishing rule
+No individual provider names or identifiers appear in any output, notebook display, or dashboard. Results are reported by item and specialty only. An outlier flag is a statistical signal compared with peers, not evidence of wrongdoing.
 
 ## Status
-Notebooks 01–12 complete. Next: Notebook 13, public CMS durable medical equipment data and anomaly detection. See [PROGRESS.md](./PROGRESS.md).
+Notebooks 01–17 complete. See [PROGRESS.md](./PROGRESS.md).
 
 ---
 *Ali Al-Khafaji*
